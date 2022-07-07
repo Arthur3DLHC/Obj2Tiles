@@ -11,16 +11,18 @@ public static class Common
     
     public static void CopyImage(Image<Rgba32> sourceImage, Image<Rgba32> dest, int sourceX, int sourceY, int sourceWidth, int sourceHeight, int destX, int destY)
     {
+        if (sourceX < 0 || sourceY < 0) return;
+
         var height = sourceHeight;
         
         sourceImage.ProcessPixelRows(dest, (sourceAccessor, targetAccessor) =>
         {
-            for (var i = 0; i < height; i++)
+            for (var i = 0; i < height && i < sourceAccessor.Height; i++)
             {
                 var sourceRow = sourceAccessor.GetRowSpan(sourceY + i);
                 var targetRow = targetAccessor.GetRowSpan(i + destY);
 
-                for (var x = 0; x < sourceWidth; x++)
+                for (var x = 0; x < sourceWidth && x < sourceAccessor.Width; x++)
                 {
                     targetRow[x + destX] = sourceRow[x + sourceX];
                 }

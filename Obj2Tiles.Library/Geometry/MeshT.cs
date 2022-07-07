@@ -431,7 +431,7 @@ public class MeshT : IMesh
 
     private void LoadTexturesCache()
     {
-        Parallel.ForEach(_materials, material => TexturesCache.GetTexture(material.Texture));
+        Parallel.ForEach(_materials, material => { if (!string.IsNullOrEmpty(material.Texture)) TexturesCache.GetTexture(material.Texture);});
     }
 
     private static readonly JpegEncoder encoder = new JpegEncoder { Quality = 75 };
@@ -441,7 +441,7 @@ public class MeshT : IMesh
     {
         var material = _materials[materialIndex];
 
-        if (material.Texture == null)
+        if (string.IsNullOrEmpty(material.Texture))
             return;
 
         var texture = TexturesCache.GetTexture(material.Texture);
@@ -1061,7 +1061,7 @@ public class MeshT : IMesh
             {
                 var material = _materials[index];
 
-                if (material.Texture != null)
+                if (!string.IsNullOrEmpty(material.Texture))
                 {
                     if (TexturesStrategy == TexturesStrategy.KeepOriginal)
                     {

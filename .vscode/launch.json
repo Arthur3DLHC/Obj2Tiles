@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Obj2Tiles/bin/Debug/net6.0/Obj2Tiles.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Obj2Tiles",
+            "program": "${workspaceFolder}/Obj2Tiles/bin/Debug/net6.0/Obj2Tiles.exe",
+            "args": ["--lat","40","--lon","120","--keeptextures", "--lods", "8", "--divisions", "4", "./input/jianzhu6_zup.obj","./output"],
+            "cwd": "${workspaceFolder}/Obj2Tiles/bin/Debug/net6.0/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
